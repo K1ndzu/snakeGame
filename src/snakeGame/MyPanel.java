@@ -1,8 +1,6 @@
 package snakeGame;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -10,13 +8,15 @@ import java.awt.event.KeyListener;
 import java.util.Random;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-
+import java.lang.Integer;
+import java.lang.Boolean;
 public class MyPanel extends JPanel implements KeyListener, ActionListener  {
 	
 	
 	final int screenWidth = 500;
 	final int screenHeight = 500;
 	final int tileSize = 25;
+	Font font;
 	int score;
 	Boolean move;
 	int bodyParts;
@@ -28,20 +28,21 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener  {
 	Timer timer;
 	Random random = new Random();
 	MyPanel(){
+		font = new Font("Arial", Font.BOLD, 25);
 		this.setFocusable(true);
 		this.setPreferredSize(new Dimension(screenWidth,screenHeight));
 		this.addKeyListener(this);
 		randomNumber();
-		
+		score = 0;
 		direction = 'R';
-		timer = new Timer(200,this);
+		timer = new Timer(100,this);
 		timer.start();
-		move = true;
+		move = (Boolean) true;
 		bodyParts = 3;
 		xSnake = new Integer[400];
 		ySnake = new Integer[400];
-		xSnake[0] =	125;
-		ySnake[0] = 125;
+		xSnake[0] = (Integer) 125;
+		ySnake[0] = (Integer) 125;
 		
 		
 	}
@@ -49,7 +50,8 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener  {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
+
 		//*g.setColor(Color.gray);
 		//for(int i = 0; i < 20; i++) {
 		//g.drawLine(0, i*tileSize, screenWidth, i*tileSize);
@@ -71,8 +73,10 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener  {
 			g.fillRect(xSnake[i], ySnake[i], tileSize, tileSize);
 		}
 
-		
-		
+
+		g.setColor(Color.BLACK);
+		g.setFont(font);
+		g.drawString("Score:" + String.valueOf(score),0,tileSize*19);
 	}
 	public void MyForLoop() {
 		for (int i = bodyParts; i > 0; i--) {
@@ -92,7 +96,6 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener  {
 		if (xSnake[0] == xApple && ySnake[0] == yApple) {
 			bodyParts++;
 			score++;
-			System.out.println(xSnake.length);
 			randomNumber();
 			repaint();
 		}

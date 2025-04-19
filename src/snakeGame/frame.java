@@ -11,10 +11,11 @@ public class frame extends JFrame {
 	frame(){
 		icon = new ImageIcon("C:/Users/Pichau/eclipse-workspace/Growing/snakeGame/src/snakeGame/apple.png").getImage();
 		panel = new MyPanel();
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(panel);
 		this.setIconImage(icon);
 		this.setTitle("SNAKE GAME");
-		this.setResizable(false);
+		this.setResizable(true);
 		this.pack();
 		this.setVisible(true);
 	}
